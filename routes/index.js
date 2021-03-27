@@ -177,7 +177,7 @@ function teleAutoPostChannel(finalAmazon,chanelName,token,urlData){
       { "text": "Kucoin", "url": "https://www.kucoin.com/ucenter/signup?rcode=rJMVH54&lang=en_US&utm_source=friendInvite" }
     ],
     [
-      { "text": "➡️ ➡️ CLICK HERE ⬅️ ⬅️", "url": urlData }
+      { "text": "📝 View Transation", "url": urlData }
     ]
   ];
     var chatId = chanelName; // <= replace with yours
