@@ -99,6 +99,7 @@ router.get('/', function (req, res, next) {
               if (userExists.length > 0 && userExists[0].text_data != 'null\n') {
              let final =[];
              let unshortenedUrl;
+             let tagnot;
              let array = userExists[0].text_data.split("\n");
            if(userExists[0].text_data.match(/(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,!&\/\/=]+)/g)){ 
              let array_length = userExists[0].text_data.match(/(((ftp|https?):\/\/)[\-\w@:%_\+.~#!?,&\/\/=]+)/g).length;
@@ -112,18 +113,17 @@ router.get('/', function (req, res, next) {
                   console.log('urls: ', urls);
                      unshort(urls[0]).then(function(unshortenedUrls){ 
                      unshortenedUrl = unshortenedUrls.unshorten.replace(/&amp;/g,'&');
-                //  if(unshortenedUrl.match(/tronscan.org/g)){
-                //       let tagnot;
-                    // if(conurlencode(unshortenedUrl).match(/[?]/g)){
-                    //   let finalLink =conurlencode(unshortenedUrl).split('?');
-                    //   console.log('finalLink: ', finalLink);
-                    //  tagnot= finalLink[0].replace(/@/g, '').concat('?r='+ListflagData.user_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&');
-                    // }else{
-                    //  tagnot= unshortenedUrl.replace(/@/g, '').concat('?r='+ListflagData.user_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&');
-                    // }
-
+                 if(unshortenedUrl.match(/bybit.com/g)){
+                    if(conurlencode(unshortenedUrl).match(/[?]/g)){
+                      let finalLink =conurlencode(unshortenedUrl).split('?');
+                      console.log('finalLink: ', finalLink);
+                     tagnot= finalLink[0].replace(/@/g, '').concat('?affiliate_id='+ListflagData.user_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&');
+                    }else{
+                     tagnot= unshortenedUrl.replace(/@/g, '').concat('?affiliate_id='+ListflagData.user_post_tag).replace(/&&/g, '&').replace(/(\?&)/g, '?').replace(/&&&/g, '&');
+                    }
                     // final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),'<a href="' + tagnot + '">Trade ' + linkTitleFinal[0] + ' On Kucoin</a>');
-                  // }else if(unshortenedUrl.match(/binance.com/g)){
+                  }else{
+                    tagnot= unshortenedUrl;
                   //     let tagnot;
                   //   if(conurlencode(unshortenedUrl).match(/[?]/g)){
                   //     let finalLink =conurlencode(unshortenedUrl).split('?');
@@ -134,7 +134,7 @@ router.get('/', function (req, res, next) {
                   //   }
                   //   final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),'<a href="' + tagnot + '">Trade ' + linkTitleFinal[0] + ' On Binance</a>');
                   //   console.log('final[j]: ', final[j]);
-                  // }
+                  }
                       })
                       .catch(function(err){ console.error('AAAW 👻', err)})
                 }else{
@@ -142,7 +142,26 @@ router.get('/', function (req, res, next) {
                 }
               }
              setTimeout(()=>{
-              let finalAmazon = final.join('\n').replace(/\[(((ftp|https?):\/\/)[\-\w@:%_\!+.~#?,&\/\/=]+)]/g, '');
+               let titlePost = "⚠️ Bulk Transaction Alert 👉 \n\n";
+              let finalAmazonDemo = final.join('\n').replace(/\[(((ftp|https?):\/\/)[\-\w@:%_\!+.~#?,&\/\/=]+)]/g, '');
+                    // final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),'<a href="' + tagnot + '">Trade ' + linkTitleFinal[0] + ' On Kucoin</a>');
+             
+              let finalAmazon = titlePost.concat(finalAmazonDemo).replace('Binance','<a href="https://www.binance.com/en/register?ref=O5GG7C15&utm_campaign=web_share_copy">Binance</a>')
+                                   .replace('Nexo','<a href="https://nexo.io/">Nexo</a>')
+                                   .replace('Okex','<a href="https://www.okex.com/">Okex</a>')
+                                   .replace('Huobi','<a href="https://www.huobi.com/">Huobi</a>')
+                                   .replace('Ftx','<a href="https://ftx.com/">Ftx</a>')
+                                   .replace('Bitstamp','<a href="https://www.bitstamp.net/">Bitstamp</a>')
+                                   .replace('Xapo','<a href="https://www.xapo.com/">Xapo</a>')
+                                   .replace('Curve.Fi','<a href="https://curve.fi/">Curve.Fi</a>')
+                                   .replace('Bitfinex','<a href="https://www.bitfinex.com/">Bitfinex</a>')
+                                   .replace('Gopax','<a href="https://www.gopax.com/">Gopax</a>')
+                                   .replace('Bybit','<a href="https://www.bybit.com/">Bybit</a>')
+                                   .replace('Aave','<a href="https://aave.com/">Aave</a>')
+                                   .replace('Bitflyer','<a href="https://bitflyer.com/en-eu/">Bitflyer</a>')
+                                   .replace('Bitbank','<a href="https://www.bitbank.com/">Bitbank</a>')
+                                   .replace('Deribit','<a href="https://www.deribit.com/">Deribit</a>')
+                                   .replace('Coinbase','<a href="https://www.coinbase.com/">Coinbase</a>')
               // if(finalAmazon.match(/(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)/g)){
                 let finalIdList = JSON.parse(ListflagData.array_data).user;
                 let insertFeild = [rides[0].post_id + i, 'demo']
@@ -151,7 +170,7 @@ router.get('/', function (req, res, next) {
                   if (err) {
                     console.log('err: ', err);
                   }else{
-//                       teleAutoPostChannel(finalAmazon,"@whalebotlivealerts",ListflagData.kudart_token,unshortenedUrl);
+                      teleAutoPostChannel(finalAmazon,"@salebabaG",ListflagData.kudart_token,tagnot);
                 }
               })
               // }
@@ -161,7 +180,27 @@ router.get('/', function (req, res, next) {
               connection.query(sqlss, function (err, rides) {
                 if (err) {
                 console.log('err: ', err);
-                }
+              }else{
+                let finalAmazon = userExists[0].text_data.replace('Binance','<a href="https://www.binance.com/en/register?ref=O5GG7C15&utm_campaign=web_share_copy">Binance</a>')
+                                   .replace('Nexo','<a href="https://nexo.io/">Nexo</a>')
+                                   .replace('Okex','<a href="https://www.okex.com/">Okex</a>')
+                                   .replace('Huobi','<a href="https://www.huobi.com/">Huobi</a>')
+                                   .replace('Ftx','<a href="https://ftx.com/">Ftx</a>')
+                                   .replace('Bitstamp','<a href="https://www.bitstamp.net/">Bitstamp</a>')
+                                   .replace('Xapo','<a href="https://www.xapo.com/">Xapo</a>')
+                                   .replace('Curve.Fi','<a href="https://curve.fi/">Curve.Fi</a>')
+                                   .replace('Bitfinex','<a href="https://www.bitfinex.com/">Bitfinex</a>')
+                                   .replace('Gopax','<a href="https://www.gopax.com/">Gopax</a>')
+                                   .replace('Bybit','<a href="https://www.bybit.com/">Bybit</a>')
+                                   .replace('Aave','<a href="https://aave.com/">Aave</a>')
+                                   .replace('Bitflyer','<a href="https://bitflyer.com/en-eu/">Bitflyer</a>')
+                                   .replace('Bitbank','<a href="https://www.bitbank.com/">Bitbank</a>')
+                                   .replace('Deribit','<a href="https://www.deribit.com/">Deribit</a>')
+                                   .replace('Kucoin','<a href="https://www.kucoin.com/ucenter/signup?rcode=rJMVH54&lang=en_US&utm_source=friendInvite">Kucoin</a>')
+                                   .replace('Coinbase','<a href="https://www.coinbase.com/">Coinbase</a>')
+                                   .replace(/[?]q=%23/g,'#').replace(/frcp/g,'').replace(/Amazon gift voucher/g,'https://amzn.to/3afr8VB - Amazon gift voucher').replace(/FRCP/g,'').replace(/ihddeals.com/g,'bestshoppingdeal.in').replace(/@loot_deal_offers/g,'@asktodealadmin_bot').replace(/@truegrabbers/g,'@asktodealadmin_bot').replace(/@loot_deal_offers/g,'').replace(/@desire_deals/g,'').replace(/@online_offers12/g,'').replace(/TX - link/g,'').replace(/@WhaleBotAlerts/g,'').replace(/@Ihd56bot/g,'@asktodealadmin_bot').replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@I/g,'').replace(/@i/g,'').replace(/@S/g,'').replace(/@s/g,'').replace(/@f/g,'').replace(/@F/g,'').replace(/(t.me[\/])/g,'').replace(/IHD/g,'').replace(/t.me/g,'').replace(/@frcp_deals/g,' ').replace(/@IHDBROADCAST/g,' ').replace(/@IHDBroadcast/g,' ').replace(/IHDBROADCAST/g,' ').replace(/@stg003/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g,'').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
+                teleAutoPostChannels(finalAmazon,"@salebabaG",ListflagData.kudart_token);
+               }
               })
             }
           }
@@ -170,13 +209,23 @@ router.get('/', function (req, res, next) {
       })
     }
 
+    function teleAutoPostChannels(finalAmazon,chanelName,token){
+      var chatId = chanelName; // <= replace with yours
+      bot = new nodeTelegramBotApi(token);
+      bot.sendMessage(chatId, finalAmazon,{
+        parse_mode: "HTML",
+        disable_web_page_preview: true
+      })
+  }
+
 function teleAutoPostChannel(finalAmazon,chanelName,token,urlData){
   var buttons = [
+    // [
+    //   { "text": "Binance", "url": "https://www.binance.com/en/register?ref=O5GG7C15&utm_campaign=web_share_copy" },
+    //   { "text": "Kucoin", "url": "https://www.kucoin.com/ucenter/signup?rcode=rJMVH54&lang=en_US&utm_source=friendInvite" }
+    // ],
     [
-      { "text": "Binance", "url": "https://www.binance.com/en/register?ref=O5GG7C15&utm_campaign=web_share_copy" },
-      { "text": "Kucoin", "url": "https://www.kucoin.com/ucenter/signup?rcode=rJMVH54&lang=en_US&utm_source=friendInvite" }
-    ],
-    [
+      { "text": "🤑 Start Earning", "url": "https://www.binance.com/en/register?ref=O5GG7C15&utm_campaign=web_share_copy" },
       { "text": "📝 View Transation", "url": urlData }
     ]
   ];
