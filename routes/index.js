@@ -170,7 +170,7 @@ router.get('/', function (req, res, next) {
                   if (err) {
                     console.log('err: ', err);
                   }else{
-                      teleAutoPostChannel(finalAmazon,"@salebabaG",ListflagData.kudart_token,tagnot);
+                      teleAutoPostChannel(finalAmazon,"@whalebotlivealerts",ListflagData.kudart_token,tagnot);
                 }
               })
               // }
@@ -199,7 +199,7 @@ router.get('/', function (req, res, next) {
                                    .replace('Kucoin','<a href="https://www.kucoin.com/ucenter/signup?rcode=rJMVH54&lang=en_US&utm_source=friendInvite">Kucoin</a>')
                                    .replace('Coinbase','<a href="https://www.coinbase.com/">Coinbase</a>')
                                    .replace(/[?]q=%23/g,'#').replace(/frcp/g,'').replace(/Amazon gift voucher/g,'https://amzn.to/3afr8VB - Amazon gift voucher').replace(/FRCP/g,'').replace(/ihddeals.com/g,'bestshoppingdeal.in').replace(/@loot_deal_offers/g,'@asktodealadmin_bot').replace(/@truegrabbers/g,'@asktodealadmin_bot').replace(/@loot_deal_offers/g,'').replace(/@desire_deals/g,'').replace(/@online_offers12/g,'').replace(/TX - link/g,'').replace(/@WhaleBotAlerts/g,'').replace(/@Ihd56bot/g,'@asktodealadmin_bot').replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@I/g,'').replace(/@i/g,'').replace(/@S/g,'').replace(/@s/g,'').replace(/@f/g,'').replace(/@F/g,'').replace(/(t.me[\/])/g,'').replace(/IHD/g,'').replace(/t.me/g,'').replace(/@frcp_deals/g,' ').replace(/@IHDBROADCAST/g,' ').replace(/@IHDBroadcast/g,' ').replace(/IHDBROADCAST/g,' ').replace(/@stg003/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g,'').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
-                teleAutoPostChannels(finalAmazon,"@salebabaG",ListflagData.kudart_token);
+                teleAutoPostChannels(finalAmazon,"@whalebotlivealerts",ListflagData.kudart_token);
                }
               })
             }
