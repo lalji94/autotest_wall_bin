@@ -46,7 +46,7 @@ router.get('/', function (req, res, next) {
           let last_insert_id = _.last(matchObj);
           console.log('last_insert_id: ', last_insert_id);
 
-          let sql = 'SELECT COUNT(*) as cnt FROM post_telegram1 WHERE post_telegram1.post_id =' + last_insert_id.id;
+          let sql = 'SELECT COUNT(*) as cnt FROM post_telegram3 WHERE post_telegram3.post_id =' + last_insert_id.id;
           connection.query(sql, function (err, rides) {
             console.log('rides: ', rides);
             if (err) {
@@ -88,7 +88,7 @@ router.get('/', function (req, res, next) {
           }
         let ListflagData = flagData[0];
         let bitly = new BitlyClient(ListflagData.current_bitly);
-        let sqls = "SELECT post_id FROM post_telegram1 ORDER BY id DESC LIMIT 1";
+        let sqls = "SELECT post_id FROM post_telegram3 ORDER BY id DESC LIMIT 1";
         connection.query(sqls, function (err, rides) {
           if (err) {
             console.log('err: ', err);
@@ -138,7 +138,7 @@ router.get('/', function (req, res, next) {
                       })
                       .catch(function(err){ console.error('AAAW 👻', err)})
                 }else{
-	               final[j] = array[j].replace(/[?]q=%23/g,'#').replace(/frcp/g,'').replace(/Amazon gift voucher/g,'https://amzn.to/3afr8VB - Amazon gift voucher').replace(/FRCP/g,'').replace(/ihddeals.com/g,'bestshoppingdeal.in').replace(/@loot_deal_offers/g,'@asktodealadmin_bot').replace(/@truegrabbers/g,'@asktodealadmin_bot').replace(/@loot_deal_offers/g,'').replace(/@desire_deals/g,'').replace(/@online_offers12/g,'').replace(/TX - link/g,'').replace(/@WhaleBotAlerts/g,'').replace(/@Ihd56bot/g,'@asktodealadmin_bot').replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@I/g,'').replace(/@i/g,'').replace(/@S/g,'').replace(/@s/g,'').replace(/@f/g,'').replace(/@F/g,'').replace(/(t.me[\/])/g,'').replace(/IHD/g,'').replace(/t.me/g,'').replace(/@frcp_deals/g,' ').replace(/@IHDBROADCAST/g,' ').replace(/@IHDBroadcast/g,' ').replace(/IHDBROADCAST/g,' ').replace(/@stg003/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g,'').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
+	               final[j] = array[j].replace(/[?]q=%23/g,'#').replace(/\[([\-\w@:%_\!+.~#?,&\/\/=]+)]/g,'').replace(/frcp/g,'').replace(/Amazon gift voucher/g,'https://amzn.to/3afr8VB - Amazon gift voucher').replace(/FRCP/g,'').replace(/ihddeals.com/g,'bestshoppingdeal.in').replace(/@loot_deal_offers/g,'@asktodealadmin_bot').replace(/@truegrabbers/g,'@asktodealadmin_bot').replace(/@loot_deal_offers/g,'').replace(/@desire_deals/g,'').replace(/@online_offers12/g,'').replace(/TX - link/g,'').replace(/@WhaleBotAlerts/g,'').replace(/@Ihd56bot/g,'@asktodealadmin_bot').replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@I/g,'').replace(/@i/g,'').replace(/@S/g,'').replace(/@s/g,'').replace(/@f/g,'').replace(/@F/g,'').replace(/(t.me[\/])/g,'').replace(/IHD/g,'').replace(/t.me/g,'').replace(/@frcp_deals/g,' ').replace(/@IHDBROADCAST/g,' ').replace(/@IHDBroadcast/g,' ').replace(/IHDBROADCAST/g,' ').replace(/@stg003/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g,'');
                 }
               }
              setTimeout(()=>{
@@ -146,26 +146,28 @@ router.get('/', function (req, res, next) {
               let finalAmazonDemo = final.join('\n').replace(/\[(((ftp|https?):\/\/)[\-\w@:%_\!+.~#?,&\/\/=]+)]/g, '');
                     // final[j] = array[j].replace(urls[0].replace(/@/g, ' ').trim(),'<a href="' + tagnot + '">Trade ' + linkTitleFinal[0] + ' On Kucoin</a>');
              
-              let finalAmazon = titlePost.concat(finalAmazonDemo).replace('Binance','<a href="https://www.binance.com/en/register?ref=O5GG7C15&utm_campaign=web_share_copy">Binance</a>')
-                                   .replace('Nexo','<a href="https://nexo.io/">Nexo</a>')
-                                   .replace('Okex','<a href="https://www.okex.com/">Okex</a>')
-                                   .replace('Huobi','<a href="https://www.huobi.com/">Huobi</a>')
-                                   .replace('Ftx','<a href="https://ftx.com/">Ftx</a>')
-                                   .replace('Bitstamp','<a href="https://www.bitstamp.net/">Bitstamp</a>')
-                                   .replace('Xapo','<a href="https://www.xapo.com/">Xapo</a>')
-                                   .replace('Curve.Fi','<a href="https://curve.fi/">Curve.Fi</a>')
-                                   .replace('Bitfinex','<a href="https://www.bitfinex.com/">Bitfinex</a>')
-                                   .replace('Gopax','<a href="https://www.gopax.com/">Gopax</a>')
-                                   .replace('Bybit','<a href="https://www.bybit.com/">Bybit</a>')
-                                   .replace('Aave','<a href="https://aave.com/">Aave</a>')
-                                   .replace('Bitflyer','<a href="https://bitflyer.com/en-eu/">Bitflyer</a>')
-                                   .replace('Bitbank','<a href="https://www.bitbank.com/">Bitbank</a>')
-                                   .replace('Deribit','<a href="https://www.deribit.com/">Deribit</a>')
-                                   .replace('Coinbase','<a href="https://www.coinbase.com/">Coinbase</a>')
+              let finalAmazon = titlePost.concat(finalAmazonDemo).replace('Binance','<a href="https://www.binance.com/en/register?ref=O5GG7C15&utm_campaign=web_share_copy"><b>Binance</b></a>')
+              .replace('Nexo','<a href="https://nexo.io/"><b>Nexo</b></a>')
+              .replace('Okex','<a href="https://www.okex.com/"><b>Okex</b></a>')
+              .replace('OKEx','<a href="https://www.okex.com/"><b>OKEx</b></a>')
+              .replace('Huobi','<a href="https://www.huobi.com/"><b>Huobi</b></a>')
+              .replace('Ftx','<a href="https://ftx.com/"><b>Ftx</b></a>')
+              .replace('Bitstamp','<a href="https://www.bitstamp.net/"><b>Bitstamp</b></a>')
+              .replace('Xapo','<a href="https://www.xapo.com/"><b>Xapo</b></a>')
+              .replace('Curve.Fi','<a href="https://curve.fi/"><b>Curve.Fi</b></a>')
+              .replace('Bitfinex','<a href="https://www.bitfinex.com/"><b>Bitfinex</b></a>')
+              .replace('Gopax','<a href="https://www.gopax.com/"><b>Gopax</b></a>')
+              .replace('Bybit','<a href="https://www.bybit.com/"><b>Bybit</b></a>')
+              .replace('Aave','<a href="https://aave.com/"><b>Aave</b></a>')
+              .replace('Bitflyer','<a href="https://bitflyer.com/en-eu/"><b>Bitflyer</b></a>')
+              .replace('Bitbank','<a href="https://www.bitbank.com/"><b>Bitbank</b></a>')
+              .replace('Deribit','<a href="https://www.deribit.com/"><b>Deribit</b></a>')
+              .replace('Kucoin','<a href="https://www.kucoin.com/ucenter/signup?rcode=rJMVH54&lang=en_US&utm_source=friendInvite"><b>Kucoin</b></a>')
+              .replace('Coinbase','<a href="https://www.coinbase.com/"><b>Coinbase</b></a>')
               // if(finalAmazon.match(/(((ftp|https?):\/\/)[\-\w@:%_\+.~#?,&\/\/=]+)/g)){
                 let finalIdList = JSON.parse(ListflagData.array_data).user;
                 let insertFeild = [rides[0].post_id + i, 'demo']
-                let sqlss = "INSERT INTO post_telegram1 (post_id,data) VALUES (" + nextId + ",'demo')";
+                let sqlss = "INSERT INTO post_telegram3 (post_id,data) VALUES (" + nextId + ",'demo')";
                 connection.query(sqlss, [insertFeild], function (err, rides) {
                   if (err) {
                     console.log('err: ', err);
@@ -176,29 +178,30 @@ router.get('/', function (req, res, next) {
               // }
               },Math.ceil(array.length/5)*3500);
             }else{
-              let sqlss = "INSERT INTO post_telegram1 (post_id,data) VALUES (" + nextId + ",'demo')";
+              let sqlss = "INSERT INTO post_telegram3 (post_id,data) VALUES (" + nextId + ",'demo')";
               connection.query(sqlss, function (err, rides) {
                 if (err) {
                 console.log('err: ', err);
               }else{
-                let finalAmazon = userExists[0].text_data.replace('Binance','<a href="https://www.binance.com/en/register?ref=O5GG7C15&utm_campaign=web_share_copy">Binance</a>')
-                                   .replace('Nexo','<a href="https://nexo.io/">Nexo</a>')
-                                   .replace('Okex','<a href="https://www.okex.com/">Okex</a>')
-                                   .replace('Huobi','<a href="https://www.huobi.com/">Huobi</a>')
-                                   .replace('Ftx','<a href="https://ftx.com/">Ftx</a>')
-                                   .replace('Bitstamp','<a href="https://www.bitstamp.net/">Bitstamp</a>')
-                                   .replace('Xapo','<a href="https://www.xapo.com/">Xapo</a>')
-                                   .replace('Curve.Fi','<a href="https://curve.fi/">Curve.Fi</a>')
-                                   .replace('Bitfinex','<a href="https://www.bitfinex.com/">Bitfinex</a>')
-                                   .replace('Gopax','<a href="https://www.gopax.com/">Gopax</a>')
-                                   .replace('Bybit','<a href="https://www.bybit.com/">Bybit</a>')
-                                   .replace('Aave','<a href="https://aave.com/">Aave</a>')
-                                   .replace('Bitflyer','<a href="https://bitflyer.com/en-eu/">Bitflyer</a>')
-                                   .replace('Bitbank','<a href="https://www.bitbank.com/">Bitbank</a>')
-                                   .replace('Deribit','<a href="https://www.deribit.com/">Deribit</a>')
-                                   .replace('Kucoin','<a href="https://www.kucoin.com/ucenter/signup?rcode=rJMVH54&lang=en_US&utm_source=friendInvite">Kucoin</a>')
-                                   .replace('Coinbase','<a href="https://www.coinbase.com/">Coinbase</a>')
-                                   .replace(/[?]q=%23/g,'#').replace(/frcp/g,'').replace(/Amazon gift voucher/g,'https://amzn.to/3afr8VB - Amazon gift voucher').replace(/FRCP/g,'').replace(/ihddeals.com/g,'bestshoppingdeal.in').replace(/@loot_deal_offers/g,'@asktodealadmin_bot').replace(/@truegrabbers/g,'@asktodealadmin_bot').replace(/@loot_deal_offers/g,'').replace(/@desire_deals/g,'').replace(/@online_offers12/g,'').replace(/TX - link/g,'').replace(/@WhaleBotAlerts/g,'').replace(/@Ihd56bot/g,'@asktodealadmin_bot').replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@I/g,'').replace(/@i/g,'').replace(/@S/g,'').replace(/@s/g,'').replace(/@f/g,'').replace(/@F/g,'').replace(/(t.me[\/])/g,'').replace(/IHD/g,'').replace(/t.me/g,'').replace(/@frcp_deals/g,' ').replace(/@IHDBROADCAST/g,' ').replace(/@IHDBroadcast/g,' ').replace(/IHDBROADCAST/g,' ').replace(/@stg003/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g,'').replace(/^\s+|\s+$|\s+(?=\s)/g, '');
+                let finalAmazon = userExists[0].text_data.replace('Binance','<a href="https://www.binance.com/en/register?ref=O5GG7C15&utm_campaign=web_share_copy"><b>Binance</b></a>')
+                                  .replace('Nexo','<a href="https://nexo.io/"><b>Nexo</b></a>')
+                                  .replace('Okex','<a href="https://www.okex.com/"><b>Okex</b></a>')
+                                  .replace('OKEx','<a href="https://www.okex.com/"><b>OKEx</b></a>')
+                                  .replace('Huobi','<a href="https://www.huobi.com/"><b>Huobi</b></a>')
+                                  .replace('Ftx','<a href="https://ftx.com/"><b>Ftx</b></a>')
+                                  .replace('Bitstamp','<a href="https://www.bitstamp.net/"><b>Bitstamp</b></a>')
+                                  .replace('Xapo','<a href="https://www.xapo.com/"><b>Xapo</b></a>')
+                                  .replace('Curve.Fi','<a href="https://curve.fi/"><b>Curve.Fi</b></a>')
+                                  .replace('Bitfinex','<a href="https://www.bitfinex.com/"><b>Bitfinex</b></a>')
+                                  .replace('Gopax','<a href="https://www.gopax.com/"><b>Gopax</b></a>')
+                                  .replace('Bybit','<a href="https://www.bybit.com/"><b>Bybit</b></a>')
+                                  .replace('Aave','<a href="https://aave.com/"><b>Aave</b></a>')
+                                  .replace('Bitflyer','<a href="https://bitflyer.com/en-eu/"><b>Bitflyer</b></a>')
+                                  .replace('Bitbank','<a href="https://www.bitbank.com/"><b>Bitbank</b></a>')
+                                  .replace('Deribit','<a href="https://www.deribit.com/"><b>Deribit</b></a>')
+                                  .replace('Kucoin','<a href="https://www.kucoin.com/ucenter/signup?rcode=rJMVH54&lang=en_US&utm_source=friendInvite"><b>Kucoin</b></a>')
+                                  .replace('Coinbase','<a href="https://www.coinbase.com/"><b>Coinbase</b></a>')
+                                   .replace(/[?]q=%23/g,'#').replace(/frcp/g,'').replace(/Amazon gift voucher/g,'https://amzn.to/3afr8VB - Amazon gift voucher').replace(/FRCP/g,'').replace(/ihddeals.com/g,'bestshoppingdeal.in').replace(/@loot_deal_offers/g,'@asktodealadmin_bot').replace(/@truegrabbers/g,'@asktodealadmin_bot').replace(/@loot_deal_offers/g,'').replace(/@desire_deals/g,'').replace(/@online_offers12/g,'').replace(/TX - link/g,'').replace(/@WhaleBotAlerts/g,'').replace(/@Ihd56bot/g,'@asktodealadmin_bot').replace(/cashkaro/g,'Deal').replace(/Cashkaro/g,'Deal').replace(/@I/g,'').replace(/@i/g,'').replace(/@S/g,'').replace(/@s/g,'').replace(/@f/g,'').replace(/@F/g,'').replace(/(t.me[\/])/g,'').replace(/IHD/g,'').replace(/t.me/g,'').replace(/@frcp_deals/g,' ').replace(/@IHDBROADCAST/g,' ').replace(/@IHDBroadcast/g,' ').replace(/IHDBROADCAST/g,' ').replace(/@stg003/g,' ').replace(/stg/g,'Best_shopping').replace(/ihd/g,' ').replace(/&#xA0;/g,' ').replace(/.#x...../g,' %E2%99%A8 ').replace(/[[\]]/g,'').replace(/&/g, 'and').replace(/;/g,'');
                 teleAutoPostChannels(finalAmazon,"@whalebotlivealerts",ListflagData.kudart_token);
                }
               })
@@ -254,7 +257,7 @@ router.post('/getAllInOneData', function (req, res) {
   async.waterfall([
     function (nextCall) {
       var sql = "Select count(*) as TotalCount from ??";
-      connection.query(sql, ['post_telegram1'], function (err, rides) {
+      connection.query(sql, ['post_telegram3'], function (err, rides) {
         if (err) {
           console.log('11');
           return nextCall({
@@ -269,7 +272,7 @@ router.post('/getAllInOneData', function (req, res) {
       startNum = parseInt(req.body.start) || 0;
       LimitNum = parseInt(req.body.length) || 10;
       var query = "Select * from ?? ORDER BY id DESC limit ? OFFSET ?";
-      connection.query(query, ["post_telegram1", LimitNum, startNum], function (err, ridess) {
+      connection.query(query, ["post_telegram3", LimitNum, startNum], function (err, ridess) {
         if (err) {
           return nextCall({
             "message": "something went wrong",
